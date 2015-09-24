@@ -16,16 +16,16 @@ import java.util.ArrayList;
 
 public class CotizarPaquetes extends AppCompatActivity {
 
-    Button cotizar;
-    Button agregarPaquete;
-    EditText alto;
-    EditText ancho;
-    EditText profundidad;
-    EditText peso;
-    EditText cantidad;
-    ArrayList<Paquete> paquetes;
-    Context contexto;
-    ListView listView;
+    public Button cotizar;
+    public Button agregarPaquete;
+    public EditText alto;
+    public EditText ancho;
+    public EditText profundidad;
+    public EditText peso;
+    public EditText cantidad;
+    public ArrayList<Paquete> paquetes;
+    public Context contexto;
+    public ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +88,7 @@ public class CotizarPaquetes extends AppCompatActivity {
 
                     AdaptadorPaqueteCotizado adaptadorPaqueteCotizado = new AdaptadorPaqueteCotizado(contexto, paquetes);
                     listView.setAdapter(adaptadorPaqueteCotizado);
-                    
+
                 } catch (NumberFormatException e) {
                     Toast.makeText(contexto,
                         "Tienes un error al momento de convertir el formato",

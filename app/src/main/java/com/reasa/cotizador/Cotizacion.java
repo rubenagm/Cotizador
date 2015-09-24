@@ -10,8 +10,7 @@ import android.widget.Button;
 
 public class Cotizacion extends AppCompatActivity {
 
-    Button nuevaCotizacion;
-
+    public Button nuevaCotizacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

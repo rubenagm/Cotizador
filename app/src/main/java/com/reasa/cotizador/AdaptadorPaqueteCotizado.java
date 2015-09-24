@@ -17,8 +17,9 @@ import java.util.ArrayList;
  */
 public class AdaptadorPaqueteCotizado extends ArrayAdapter<Paquete> {
 
-    ArrayList<Paquete> paquetes;
-    Context contexto;
+    public ArrayList<Paquete> paquetes;
+    public Context contexto;
+
     public AdaptadorPaqueteCotizado(Context contexto, ArrayList<Paquete> paquetes){
         super(contexto, -1 , paquetes);
         this.paquetes = paquetes;
