@@ -1,0 +1,93 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.reasa.cotizador.CotizarPaquetes">
+
+    <TextView
+        android:text="Alto"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/paquete_alto"
+        android:inputType="number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="Ancho"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/paquete_ancho"
+        android:inputType="number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="Profundidad"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/paquete_profundidad"
+        android:inputType="number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="Peso"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/paquete_peso"
+        android:inputType="number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="Cantidad de paquetes"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/paquete_cantidad"
+        android:inputType="number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/agregar_paquete"
+            android:text="Agregar"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="Cantidad de paquetes agregados: 4"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp" />
+        <ListView
+            android:id="@+id/paquetes"
+            android:layout_weight="6"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"></ListView>
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/cotizar_envio"
+            android:text="Cotizar"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp" />
+
+    </LinearLayout>
+</LinearLayout>
