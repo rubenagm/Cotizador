@@ -32,13 +32,16 @@ public class Cotizacion extends AppCompatActivity {
         context = getApplicationContext();
         getSupportActionBar().hide();
 
-        costoViaje = getIntent().getExtras().getDouble("CostoViaje", 1.0);
+        costoViaje   = getIntent().getExtras().getDouble("CostoViaje", 1.0);
         String viaje = getIntent().getExtras().getString("Viaje", "");
         paquetes = new ArrayList<>();
 
         TextView totalCotizacion = (TextView) findViewById(R.id.total_cotizacion);
         TextView viajeDestino = (TextView) findViewById(R.id.viaje_destino);
         TextView textViewCantidad = (TextView) findViewById(R.id.cantidad_cotizacion);
+        TextView textViewDescuento = (TextView) findViewById(R.id.descuento);
+        textViewDescuento.setVisibility(View.GONE);
+
         viajeDestino.setText("La cotización corresponde de: " + viaje);
         ArrayList<String> nombres = getIntent().getStringArrayListExtra("NombrePaquetes");
         ArrayList<String> alto    = getIntent().getStringArrayListExtra("AltoPaquetes");
@@ -58,12 +61,28 @@ public class Cotizacion extends AppCompatActivity {
         AdaptadorPaqueteCotizado adaptadorPaqueteCotizado = new AdaptadorPaqueteCotizado(context, paquetes, costoViaje);
 
         double total = 0;
-
+        double descuento = 0;
         for (Paquete paquete : paquetes) {
             total += paquete.getPrecio(costoViaje);
         }
 
         DecimalFormat df = new DecimalFormat("#.00");
+
+        //Descuentos
+        if (paquetes.size() > 3 && paquetes.size() < 11) {
+            textViewDescuento.setVisibility(View.VISIBLE);
+            descuento = total * 0.11;
+            total = total * 0.89;
+
+            textViewDescuento.setText("Se realizó un descuento de: $" + df.format(descuento));
+        } else if (paquetes.size() > 10) {
+            textViewDescuento.setVisibility(View.VISIBLE);
+            descuento = total * 0.22;
+            total = total * 0.78;
+
+            textViewDescuento.setText("Se realizó un descuento de: $" + df.format(descuento));
+        }
+
         totalCotizacion.setText("$" + df.format(total));
 
         listView.setAdapter(adaptadorPaqueteCotizado);
