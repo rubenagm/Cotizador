@@ -16,16 +16,23 @@ public class Paquete {
     }
 
     public Paquete(double alto, double ancho, double profundidad, double peso){
-        this.alto       = alto;
+        this.alto        = alto;
         this.ancho       = ancho;
         this.profundidad = profundidad;
         this.peso        = peso;
     }
 
-    public double getPrecio(){
+    public double getPrecio(double costoViaje){
 
+        double valorPeso;
 
-        return 1.0;
+        if (peso > ((alto * ancho * profundidad) / 5000)) {
+            valorPeso = peso;
+        } else {
+            valorPeso = ((alto * ancho * profundidad) / 5000);
+        }
+
+        return costoViaje * valorPeso;
     }
 
     public void setAlto(double alto){

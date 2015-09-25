@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -19,11 +22,13 @@ public class AdaptadorPaqueteCotizado extends ArrayAdapter<Paquete> {
 
     public ArrayList<Paquete> paquetes;
     public Context contexto;
+    public double costoViaje;
 
-    public AdaptadorPaqueteCotizado(Context contexto, ArrayList<Paquete> paquetes){
+    public AdaptadorPaqueteCotizado(Context contexto, ArrayList<Paquete> paquetes, double costoViaje){
         super(contexto, -1 , paquetes);
-        this.paquetes = paquetes;
-        this.contexto = contexto;
+        this.paquetes   = paquetes;
+        this.costoViaje = costoViaje;
+        this.contexto   = contexto;
     }
 
     @Override
@@ -52,12 +57,16 @@ public class AdaptadorPaqueteCotizado extends ArrayAdapter<Paquete> {
         TextView ancho       = (TextView) view.findViewById(R.id.ancho);
         TextView profundidad = (TextView) view.findViewById(R.id.profundidad);
         TextView peso        = (TextView) view.findViewById(R.id.peso);
+        TextView nombre      = (TextView) view.findViewById(R.id.nombre_paquete);
+        TextView numeroPaquete = (TextView) view.findViewById(R.id.numero_paquete);
 
-        alto.setText(paquetes.get(position).getAlto() + "");
-        ancho.setText(paquetes.get(position).getAncho() + "");
-        profundidad.setText(paquetes.get(position).getProfundidad() + "");
-        peso.setText(paquetes.get(position).getPeso() + "");
-
+        DecimalFormat df = new DecimalFormat("#.00");
+        alto.setText("Alto: " + df.format(paquetes.get(position).getAlto()) + " cm.");
+        ancho.setText("Ancho: " + df.format(paquetes.get(position).getAncho()) + " cm.");
+        profundidad.setText("Profundidad: " + df.format(paquetes.get(position).getProfundidad()) + " cm.");
+        peso.setText("Peso: " + df.format(paquetes.get(position).getPeso()) + " kg.");
+        nombre.setText("$" + df.format(paquetes.get(position).getPrecio(costoViaje)));
+        numeroPaquete.setText("Paquete: " + position + 1);
         return view;
     }
 }

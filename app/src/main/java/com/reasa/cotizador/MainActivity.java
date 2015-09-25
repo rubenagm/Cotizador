@@ -1,17 +1,17 @@
 package com.reasa.cotizador;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
-
+    public Context contexto;
     public Button comenzar;
     public Spinner spinner;
     public String[] viajes = {"Culiacan - Guadalajara",
@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getSupportActionBar().hide();
         comenzar = (Button) findViewById(R.id.comenzar_cotizacion);
-
+        contexto = getApplicationContext();
         comenzar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,12 +41,11 @@ public class MainActivity extends AppCompatActivity {
         //Spinner
         spinner = (Spinner) findViewById(R.id.spinner);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
-                                                this,
-                                                    android.R.layout.simple_spinner_item,
-                                                        viajes);
-        spinner.setAdapter(arrayAdapter);
+        AdapterSpinner adapterSpinner = new AdapterSpinner(contexto, viajes);
+        spinner.setAdapter(adapterSpinner);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
