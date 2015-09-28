@@ -99,8 +99,8 @@ public class Cotizacion extends AppCompatActivity {
             totalCotizacion.setText("$" + df.format(total));
         } else {
             subtotal.setText("$ " + df.format(total) +  " Subtotal");
-            iva.setText("+ $ " + df.format(total * .12) +  " IVA");
-            retenciones.setText("$ " + df.format(total * .04) + " Retenciones" );
+            iva.setText("+ $ " + df.format(total * .16) +  " IVA");
+            retenciones.setText(" - $ " + df.format(total * .04) + " Retencion" );
             total = total * 1.12;
             totalCotizacion.setText("$" + df.format(total));
             retenciones.setVisibility(View.VISIBLE);
