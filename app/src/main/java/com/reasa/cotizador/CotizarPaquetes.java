@@ -33,6 +33,7 @@ public class CotizarPaquetes extends AppCompatActivity {
     public int contador = 0;
     public double costoViaje = 1.0;
     public String viajeTexto = "";
+    public String persona;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class CotizarPaquetes extends AppCompatActivity {
         setContentView(R.layout.activity_cotizar_paquetes);
         pasoParametros = new PasoParametros();
         getSupportActionBar().hide();
-
+        persona = getIntent().getExtras().getString("TipoPersona");
         viajeTexto = getIntent().getStringExtra("Viaje");
         contexto = this.getApplicationContext();
         paquetes = new ArrayList<>();
@@ -103,6 +104,7 @@ public class CotizarPaquetes extends AppCompatActivity {
                     intent.putStringArrayListExtra("AnchoPaquetes", pasoParametros.getAncho());
                     intent.putStringArrayListExtra("ProfundidadPaquetes", pasoParametros.getProfundidad());
                     intent.putStringArrayListExtra("PesoPaquetes", pasoParametros.getPeso());
+                    intent.putExtra("TipoPersona", persona);
                     intent.putExtra("CostoViaje", costoViaje);
                     intent.putExtra("Viaje", viajeTexto);
                     startActivity(intent);

@@ -24,6 +24,7 @@ public class Cotizacion extends AppCompatActivity {
     public ListView listView;
     public Context context;
     public Double costoViaje;
+    public String persona;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class Cotizacion extends AppCompatActivity {
         setContentView(R.layout.activity_cotizacion);
         context = getApplicationContext();
         getSupportActionBar().hide();
-
+        persona = getIntent().getExtras().getString("TipoPersona");
         costoViaje   = getIntent().getExtras().getDouble("CostoViaje", 1.0);
         String viaje = getIntent().getExtras().getString("Viaje", "");
         paquetes = new ArrayList<>();
@@ -40,6 +41,13 @@ public class Cotizacion extends AppCompatActivity {
         TextView viajeDestino = (TextView) findViewById(R.id.viaje_destino);
         TextView textViewCantidad = (TextView) findViewById(R.id.cantidad_cotizacion);
         TextView textViewDescuento = (TextView) findViewById(R.id.descuento);
+        TextView iva = (TextView) findViewById(R.id.iva);
+        TextView retenciones = (TextView) findViewById(R.id.retenciones);
+        TextView subtotal = (TextView) findViewById(R.id.subtotal);
+
+        subtotal.setVisibility(View.GONE);
+        iva.setVisibility(View.GONE);
+        retenciones.setVisibility(View.GONE);
         textViewDescuento.setVisibility(View.GONE);
 
         viajeDestino.setText("La cotización corresponde de: " + viaje);
@@ -74,16 +82,32 @@ public class Cotizacion extends AppCompatActivity {
             descuento = total * 0.11;
             total = total * 0.89;
 
-            textViewDescuento.setText("Se realizó un descuento de: $" + df.format(descuento));
+            textViewDescuento.setText("Se realizó un descuento de: - $" + df.format(descuento));
         } else if (paquetes.size() > 10) {
             textViewDescuento.setVisibility(View.VISIBLE);
             descuento = total * 0.22;
             total = total * 0.78;
 
-            textViewDescuento.setText("Se realizó un descuento de: $" + df.format(descuento));
+
+            textViewDescuento.setText("Se realizó un descuento de: - $" + df.format(descuento));
         }
 
-        totalCotizacion.setText("$" + df.format(total));
+        if (persona.equals("Fisica")) {
+            subtotal.setText("$ " + df.format(total) +  " Subtotal");
+            iva.setText("+ $ " + df.format(total * .16) +  " IVA");
+            total = total * 1.16;
+            totalCotizacion.setText("$" + df.format(total));
+        } else {
+            subtotal.setText("$ " + df.format(total) +  " Subtotal");
+            iva.setText("+ $ " + df.format(total * .12) +  " IVA");
+            retenciones.setText("$ " + df.format(total * .04) + " Retenciones" );
+            total = total * 1.12;
+            totalCotizacion.setText("$" + df.format(total));
+            retenciones.setVisibility(View.VISIBLE);
+        }
+
+        iva.setVisibility(View.VISIBLE);
+        subtotal.setVisibility(View.VISIBLE);
 
         listView.setAdapter(adaptadorPaqueteCotizado);
         nuevaCotizacion = (Button) findViewById(R.id.nueva_cotizacion);

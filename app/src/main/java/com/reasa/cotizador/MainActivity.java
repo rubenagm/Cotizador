@@ -8,12 +8,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     public Context contexto;
     public Button comenzar;
     public Spinner spinner;
+    public Switch switchPersona;
+    public TextView textoPersona;
     public String[] viajes = {"Culiacan - Guadalajara",
                                 "Culiacan - Tepic",
                                     "Culiacan - Mazatlan",
@@ -25,7 +30,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        comenzar = (Button) findViewById(R.id.comenzar_cotizacion);
+        comenzar       = (Button) findViewById(R.id.comenzar_cotizacion);
+        switchPersona  = (Switch) findViewById(R.id.switch_persona);
+        textoPersona   = (TextView) findViewById(R.id.tipo_persona);
+
+        if (switchPersona.isChecked()){
+            textoPersona.setText("Se cotizará para persona Física");
+        } else {
+            textoPersona.setText("Se cotizará para persona Moral");
+        }
+
+        switchPersona.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (switchPersona.isChecked()){
+                    textoPersona.setText("Se cotizará para persona Física");
+                } else {
+                    textoPersona.setText("Se cotizará para persona Moral");
+                }
+            }
+        });
         contexto = getApplicationContext();
         comenzar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
                 String viaje  = spinner.getSelectedItem().toString();
                 intent.putExtra("Viaje", viaje);
                 intent.putExtra("Costo", obtenerValor(viaje));
+
+                if (switchPersona.isChecked()) {
+                    intent.putExtra("TipoPersona", "Fisica");
+                } else {
+                    intent.putExtra("TipoPersona", "Moral");
+                }
                 startActivity(intent);
             }
         });
