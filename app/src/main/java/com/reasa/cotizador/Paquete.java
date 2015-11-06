@@ -26,10 +26,10 @@ public class Paquete {
 
         double valorPeso;
 
-        if (peso > ((alto * ancho * profundidad) / 5000)) {
+        if (peso > ((alto * ancho * profundidad) / 3500)) {
             valorPeso = peso;
         } else {
-            valorPeso = ((alto * ancho * profundidad) / 5000);
+            valorPeso = ((alto * ancho * profundidad) / 3500);
         }
 
         return costoViaje * valorPeso;
